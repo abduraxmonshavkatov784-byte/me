@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uzbekistan History Test</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%230a0e27;stop-opacity:1" /><stop offset="50%" style="stop-color:%231a1a3e;stop-opacity:1" /><stop offset="100%" style="stop-color:%23000000;stop-opacity:1" /></linearGradient><pattern id="registan" patternUnits="userSpaceOnUse" width="400" height="300"><rect fill="%23000a1a" width="400" height="300"/><circle cx="100" cy="100" r="40" fill="%23663399" opacity="0.1"/><circle cx="300" cy="150" r="60" fill="%238b5fbf" opacity="0.08"/><polygon points="150,50 200,150 100,150" fill="%239370db" opacity="0.05"/></pattern></svg>');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-color: #0a0e27;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(102, 126, 234, 0.8);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.container{
+    width:90%;
+    max-width:500px;
+    background: rgba(20, 20, 60, 0.4);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(102, 126, 234, 0.15), inset 0 0 20px rgba(102, 126, 234, 0.05);
+    animation: fadeInDown 0.8s ease;
+    position: relative;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.title{
+    font-size:28px;
+    font-weight:bold;
+    color:#e0d5ff;
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+    letter-spacing: 1px;
+}
+
+.timer{
+    font-size:22px;
+    font-weight:bold;
+    color:#ff6b9d;
+    background: rgba(102, 126, 234, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(102, 126, 234, 0.4);
+}
+
+.progress{
+    margin-bottom:20px;
+    font-size:18px;
+    color: #a89cc9;
+    font-weight: 500;
+}
+
+.question{
+    font-size:24px;
+    margin-bottom:25px;
+    color:#e0d5ff;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.answers{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.answer{
+    padding:15px;
+    border:2px solid rgba(102, 126, 234, 0.3);
+    border-radius:12px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+    font-size:18px;
+    background: rgba(102, 126, 234, 0.08);
+    color: #c9b8e4;
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 0.5s ease backwards;
+}
+.answer::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(147, 112, 219, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.answer:hover::before {
+    left: 100%;
+}
+
+.answer:hover{
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+    transform: translateX(5px);
+    color: #e0d5ff;
+}
+
+.selected{
+    background: rgba(102, 126, 234, 0.3);
+    color:#e0d5ff;
+    border-color: rgba(102, 126, 234, 0.6);
+}
+
+.answer.correct{
+    background: rgba(34, 197, 94, 0.3);
+    color:#86efac;
+    border-color: rgba(34, 197, 94, 0.6);
+}
+
+.answer.wrong{
+    background: rgba(239, 68, 68, 0.3);
+    color:#fca5a5;
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+.feedback{
+    margin-top:15px;
+    font-size:18px;
+    min-height:24px;
+    color: #86efac;
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    color:white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#nextBtn{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+#nextBtn:hover{
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+}
+
+#finishBtn{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+#finishBtn:hover{
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+}
+
+#startBtn{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    padding: 15px 40px;
+    font-size: 20px;
+}
+
+#startBtn:hover{
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+}
+
+#authButton {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    width: 100%;
+    padding: 14px;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+#authButton:hover {
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+}
+
+.auth-toggle{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:20px 0 10px;
+}
+
+.auth-toggle button{
+    background: rgba(102, 126, 234, 0.1);
+    color:#c9b8e4;
+    padding:10px 18px;
+    border-radius:10px;
+    font-size:16px;
+    border:1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.auth-toggle button:hover {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+.auth-toggle .active{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color:#e0d5ff;
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.auth-fields{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.auth-fields input{
+    padding:12px 15px;
+    border:2px solid rgba(102, 126, 234, 0.2);
+    border-radius:10px;
+    font-size:16px;
+    background: rgba(102, 126, 234, 0.08);
+    color: #c9b8e4;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.5s ease backwards;
+}
+
+.auth-fields input::placeholder {
+    color: rgba(201, 184, 228, 0.5);
+}
+.auth-fields input:focus {
+    outline: none;
+    border-color: rgba(102, 126, 234, 0.6);
+    background: rgba(102, 126, 234, 0.15);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4), inset 0 0 10px rgba(102, 126, 234, 0.1);
+    transform: scale(1.02);
+    color: #e0d5ff;
+}
+
+.auth-message{
+    font-size:16px;
+    min-height:22px;
+    color:#ff6b9d;
+    text-align: center;
+}
+
+.review-item{
+    border:1px solid rgba(102, 126, 234, 0.3);
+    border-radius:10px;
+    padding:14px;
+    margin-top:14px;
+    text-align:left;
+    background: rgba(102, 126, 234, 0.08);
+    backdrop-filter: blur(5px);
+    color: #c9b8e4;
+}
+
+.review-item strong{
+    display:block;
+    margin-bottom:10px;
+}
+
+.review-item p{
+    margin:4px 0;
+}
+
+.start-screen{
+    text-align:center;
+    padding:40px 0;
+    color: #c9b8e4;
+}
+
+.start-screen .intro{
+    font-size:20px;
+    margin:20px 0;
+    color: #a89cc9;
+}
+
+.result{
+    text-align:center;
+    display:none;
+    color: #c9b8e4;
+}
+
+.result h1{
+    margin-bottom:20px;
+    font-size: 32px;
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    color: #e0d5ff;
+}
+
+.result p{
+    font-size:22px;
+    margin:10px 0;
+}
+
+.restart{
+    margin-top:20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    padding: 15px 40px;
+}
+
+.loading-spinner {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.icon {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 25px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .question {
+        font-size: 20px;
+    }
+    
+    .answer {
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    button {
+        padding: 12px 18px;
+        font-size: 16px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .timer {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        width: 100%;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .question {
+        font-size: 18px;
+    }
+    
+    .answer {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div id="loginBox" class="start-screen">
+  <div class="header">
+    <div class="title">📚 Uzbekistan History Test</div>
+  </div>
+  <div class="auth-toggle">
+    <button id="showLoginBtn" class="active">👤 Entrance</button>
+    <button id="showRegisterBtn">✍️ Register</button>
+  </div>
+  <div class="auth-fields">
+    <input id="usernameInput" type="text" placeholder="👤 Username">
+    <input id="passwordInput" type="password" placeholder="🔐 Password">
+    <input id="confirmPasswordInput" type="password" placeholder="🔐 Confirm password" style="display:none;">
+  </div>
+  <div id="authMessage" class="auth-message"></div>
+  <button id="authButton">🚀 Entrance</button>
+</div>
+
+<div id="startBox" class="start-screen" style="display:none;">
+  <div class="header">
+    <div class="title">📚 Uzbekistan History Test</div>
+  </div>
+  <p class="intro">Click the button to start the test.</p>
+  <button id="startBtn">▶️ Start</button>
+</div>
+
+<div id="quizBox" style="display:none;">
+
+<div class="header">
+<div class="title">📚 Uzbekistan History Test</div>
+<div class="timer" id="timer">⏱️ 50:00</div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="answers" id="answers"></div>
+<div id="feedback" class="feedback"></div>
+
+<div class="buttons">
+<button id="nextBtn">⬇️ Next</button>
+<button id="finishBtn">✅ Finish</button>
+</div>
+
+</div>
+
+<div class="result" id="resultBox">
+<h1>🎉 Test Completed</h1>
+<p id="correct"></p>
+<p id="wrong"></p>
+<p id="score"></p>
+<div id="review"></div>
+<button class="restart" onclick="location.reload()">🔄 Restart Test</button>
+</div>
+
+</div>
+
+
+
+
+
+<script>
+
+const tests = [
+
+{
+question:"Buxoro Amirligi tarkibida nechta viloyat bo‘lgan?",
+options:["24 ta","40 ta","15 ta","32 ta"],
+answer:"40 ta"
+},
+
+{
+question:"XIX asrda Buxoro amirligi aholisi qancha bo‘lgan?",
+options:["1 million","2 million","5 million","800 ming"],
+answer:"2 million"
+},
+
+{
+question:"XIX asrda Xiva xonligi nechta beklikka bo‘lingan?",
+options:["10 ta beklikka bo'lingan","15 ta beklikka bo'lingan","18 ta beklikka bo'lingan","20 ta beklikka bo'lingan"],
+answer:"18 ta beklikka bo'lingan"
+},
+
+{
+question:"Xiva xonligi nechta noiblikka bo‘lingan?",
+options:["1 ta noiblikka bo'lingan","2 ta noiblikka bo'lingan","4 ta noiblikka bo'lingan","5 ta noiblikka bo'lingan"],
+answer:"2 ta noiblikka bo'lingan"
+},
+
+{
+question:"Xiva xonligida beklik va noibliklarni kimlar boshqargan?",
+options:["Beklar va to‘ralar","Amirlar","Qozi","Vazirlar"],
+answer:"Beklar va to‘ralar"
+},
+
+{
+question:"Qo‘qon xonligi nechta beklikka bo‘lingan?",
+options:["10 ta beklikka bo'lingan","15 ta beklikka bo'lingan","20 ta beklikka bo'lingan","25 ta beklikka bo'lingan"],
+answer:"15 ta beklikka bo'lingan"
+},
+
+{
+question:"Xiva xonligida aholi soni asosan qancha bo‘lgan ?",
+options:["20 ming kishidan ortiq","800 ming kishidan ortiq","2 milliondan ortiq","1 milliondan ortiq"],
+answer:"800 ming kishidan ortiq"
+},
+
+{
+question:"Xiva xonligining ma’muriy markazi qaysi shahar bo‘lgan?",
+options:["Urganch","Xiva","Qo‘qon","Buxoro"],
+answer:"Xiva"
+},
+
+{ 
+question:"Qo‘qon shahrida aholi soni qancha bo‘lgan?",
+options:["3 millionga yaqin","1 million","20 ming","2 milliondan ortiq"],
+answer:" 3 millionga yaqin"
+},
+
+{
+question:"Buxoro amirligida oliy hukmdor kim hisoblangan?",
+options:["Xon","Bek","Amir","Qozi"],
+answer:"Amir"
+},
+
+{
+question:"Buxoro amirligida xalqning shikoyatlari bilan kim shug‘ullangan?",
+options:["Dodxoh","Mushrif","Otaliq","Parvonachi"],
+answer:"Dodxoh"
+},
+
+{
+question:"Buxoro amirligida shariat va qonunlarni kim nazorat qilgan?",
+options:["Otaliq","Shayxulislom","Mushrif","Devonbegi"],
+answer:"Shayxulislom"
+}, 
+
+{ 
+question:"Buxoro amirligida taxt vorisi va valiahd tarbiyasi bilan kim shug‘ullangan?",
+options:["Otaliq","Shayxulislom","Mushrif","Devonbegi"],
+answer:"Otaliq"
+},
+
+{ 
+question:"Buxoro amirligida soliqlarni o‘z vaqtida yig‘ishga javobgar shaxs kim bo’lgan?",
+options:["Otaliq","Shayxulislom","Mushrif","Devonbegi"],
+answer:"Mushrif"
+},
+
+{ 
+question:"Buxoro amirligida oliy hukmdor farmonlarini kim e’lon qilgan?",
+options:["Parvonachi","Shayxulislom","Mushrif","Devonbegi"],
+answer:"Parvonachi"
+},
+
+{ 
+question:"Xiva xonligida Oliy amaldor kim bo’lgan?",
+options:["Parvonachi","Shayxulislom","Mushrif","Devonbegi"],
+answer:"Devonbegi"
+},
+
+{ 
+question:"Xiva xonligida asosiy soliq turi nima deb atalgan?",
+options:["Soliquz","Solg'ut","Soliq","Soliqbegi"],
+answer:"Solg'ut"
+},
+
+{ 
+question:"Xiva xonligida sug‘orish ishlari bilan kim shug‘ullangan?",
+options:["hukumdorlar","Amirlar","Soliqlar","Miroblar"],
+answer:"Miroblar"
+},
+
+{ 
+question:"“Agrar” so’zini ma’nosi?",
+options:["Agrarius","Qishloq xo‘jaligiga oid degan ma’noni bildiradi.","soliq","Agranom"],
+answer:"Qishloq xo‘jaligiga oid degan ma’noni bildiradi."
+},
+
+{ 
+question:"Aqshda qachon shimol va janub o‘rtasida fuqarolar urushi boshlangan?",
+options:["1843-yilda","1867-yilda","1856-yilda","1861-1865-yillarda"],
+answer:"1861-1865-yillarda"
+},
+
+{ 
+question:"Oqmachit qal’asi qachon ruslar tomonidan egallangan?",
+options:["1853-yilda","1852-yilda","1856-yilda","1861-1865-yillarda"],
+answer:"1853-yilda"
+},
+
+{ 
+question:"Ruslar tomonidan qachon Chimkent shahri egallangan?",
+options:["1853-yilda","1852-yilda","1856-yilda","1864-yilda"],
+answer:"1864-yilda"
+},
+
+{ 
+question:"XIX asrning ikkinchi yarmida Toshkent shahrining nechta darvozasi bo‘lgan?",
+options:["12ta","11ta","15ta","18ta"],
+answer:"12ta"
+},
+
+{ 
+question:"Turkiston general gubernatorligi qachon tashkil etilgan?",
+options:["1867-yilda","1865-yilda","1856-yilda","1861-1865-yillarda"],
+answer:"1867-yilda"
+},
+
+{ 
+question:"Turkiston general gubernatorligiga kim birinchi rahbar etib tayinlangan?",
+options:["Bek","Amir","Kaufman","Men"],
+answer:"Kaufman"
+},
+
+{ 
+question:"1878-yili Mingtepada qanday qo’zg’olon ko’tarildi?",
+options:["🧨","Daxshatli qo'zg'olon","Yetimxon boshchiligida qo'zg'olon ko'tarildi","Siyosiy va iqtisodiy zulmga qarshi"],
+answer:"Siyosiy va iqtisodiy zulmga qarshi"
+},
+
+{ 
+question:"Qachon Afg‘onistonda vabo kasalligi tarqaladi?",
+options:["1894-yilda","Kecha","1895-yilda","1892 yil mart oyida"],
+answer:"1892 yil mart oyida"
+},
+
+{
+question:"Birinchi jahon urushi qachon boshlangan?",
+options:["1912 yilda","1914 yilda","1916 yilda","1918 yilda"],
+answer:"1914 yilda"
+},
+
+{
+question:"Qachon Jizzaxda mardikorlikka qarshi ommaviy qo‘zg‘alon e’lon qilindi?",
+options:["1914 yil","1915 yil","1916 yil","1917 yil"],
+answer:"1916 yil"
+},
+
+{
+question:"XIX asrning ikkinchi yarmida butun qoraqalpoq urug‘larini boshqarish uchun qanday lavozim tashkil etilgan?",
+options:["Devonbegi","Mingboshi","Beklarbegi","Parvonachi"],
+answer:"Beklarbegi"
+},
+
+{
+question:"Qoraqalpoq xalqining hayoti va ko‘chib yurishlari haqida yozilgan doston qaysi?",
+options:["Alpomish","Go‘ro‘g‘li","Bo‘zatov","Qirq qiz"],
+answer:"Bo‘zatov"
+},
+
+{
+question:"Qirq qiz dostoni qaysi xalq og‘zaki ijodiga mansub?",
+options:["Qozoq","O‘zbek","Qirg‘iz","Qoraqalpoq"],
+answer:"Qoraqalpoq"
+},
+
+{
+question:"Jadid so‘zining ma’nosi nima?",
+options:["Eski","Yangi","Ilm","Maktab"],
+answer:"Yangi"
+},
+
+{
+question:"Jadid so‘zi qaysi tildan olingan?",
+options:["Fors","Turk","Arab","Rus"],
+answer:"Arab"
+},
+
+{
+question:"Turkistonda ma’rifatparvarlik harakati qachon vujudga kelgan?",
+options:["XVIII asrda","XIX asr 2-yarmida","XX asr boshida","XVII asr oxirida"],
+answer:"XIX asr 2-yarmida"
+},
+
+{
+question:"Jadidchilik harakatiga kim asos solgan?",
+options:["Behbudiy","Avloniy","Munavvarqori","Ismoil G‘aspirali"],
+answer:"Ismoil G‘aspirali"
+},
+
+{
+question:"Ismoil G‘aspirali qayerda tug‘ilgan?",
+options:["Toshkentda","Qrimning Avjiko‘y qishlog‘ida","Buxoroda","Qozonda"],
+answer:"Qrimning Avjiko‘y qishlog‘ida"
+},
+
+{
+question:"Ismoil G‘aspirali qachon tug‘ilgan?",
+options:["1845 yil","1851 yil","1860 yil","1870 yil"],
+answer:"1851 yil"
+},
+
+{
+question:"Ismoil G‘aspirali qachon Toshkent, Samarqand va Buxoroga tashrif buyurgan?",
+options:["1889 yilda","1891 yilda","1893 yilda","1900 yilda"],
+answer:"1893 yilda"
+},
+
+{
+question:"Jadidchilik g‘oyalarining keng yoyilishida qaysi gazeta muhim rol o‘ynagan?",
+options:["Hurriyat","Sadoyi Turkiston","Tarjimon","Turon"],
+answer:"Tarjimon"
+},
+
+{
+question:"O‘rta Osiyoda birinchi jadid maktabi qayerda ochilgan?",
+options:["Xiva xonligida","Qo‘qon xonligida","Buxoro amirligida","Toshkentda"],
+answer:"Buxoro amirligida"
+},
+
+{
+question:"Buxoroda jadidchilik qachondan boshlab siyosiy tashkilot sifatida shakllana boshladi?",
+options:["1900 yildan","1905 yildan","1910 yildan","1917 yildan"],
+answer:"1910 yildan"
+},
+
+{
+question:"O‘rta Osiyoda jadidchilik harakatlari hududiy xususiyatlariga ko‘ra nechta turga bo‘linadi?",
+options:["2 turga","3 turga","4 turga","5 turga"],
+answer:"3 turga"
+},
+
+{
+question:"Qaysi hududda jadidchilik harakati mutaasib dindorlar qarshiligiga uchragan?",
+options:["Toshkent","Qo‘qon","Xiva","Buxoro"],
+answer:"Buxoro"
+},
+
+{
+question:"Xiva xonligida jadidchilik harakati nechta oqimdan iborat bo‘lgan?",
+options:["1 ta","2 ta","3 ta","4 ta"],
+answer:"2 ta"
+},
+
+{
+question:"Ma’rifatparvarlikdan boshlangan jadidchilik harakati ikkinchi bosqichda qanday ko‘rinishga ega bo‘lgan?",
+options:["Harbiy","Iqtisodiy","Siyosiy","Madaniy"],
+answer:"Siyosiy"
+},
+
+{
+question:"Qachondan boshlab yangi usul maktablarini ochish uchun ruxsatnoma olish belgilandi?",
+options:["1905 yildan","1907 yildan","1909 yildan","1911 yildan"],
+answer:"1909 yildan"
+},
+
+{
+question:"Salohiddin domla tomonidan ikkinchi jadid maktabi qaysi shaharda ochilgan?",
+options:["Toshkentda","Samarqandda","Buxoroda","Qo‘qon shahrida"],
+answer:"Qo‘qon shahrida"
+},
+
+{
+question:"Andijonda Shamsiddin domla va Toshkentda Mannon qori qachon jadid maktabini ochgan?",
+options:["1895 yilda","1897 yilda","1899 yilda","1901 yilda"],
+answer:"1899 yilda"
+},
+{
+question:"O‘rta Osiyo jadidlarining otasi deb kim tan olingan?",
+options:["Abdulla Avloniy","Munavvarqori","Mahmudxo‘ja Behbudiy","Fitrat"],
+answer:"Mahmudxo‘ja Behbudiy"
+},
+];
+
+
+tests.sort(() => Math.random() - 0.5);
+
+let current = 0;
+let correct = 0;
+let selectedAnswer = null;
+
+const question = document.getElementById("question");
+const answers = document.getElementById("answers");
+const progress = document.getElementById("progress");
+const feedback = document.getElementById("feedback");
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const startBox = document.getElementById("startBox");
+const quizBox = document.getElementById("quizBox");
+const loginBox = document.getElementById("loginBox");
+const showLoginBtn = document.getElementById("showLoginBtn");
+const showRegisterBtn = document.getElementById("showRegisterBtn");
+const usernameInput = document.getElementById("usernameInput");
+const passwordInput = document.getElementById("passwordInput");
+const confirmPasswordInput = document.getElementById("confirmPasswordInput");
+const authButton = document.getElementById("authButton");
+const authMessage = document.getElementById("authMessage");
+const review = document.getElementById("review");
+let timerInterval = null;
+let answered = false;
+let authMode = "login";
+let currentUser = null;
+let answerLog = [];
+
+function setAuthMessage(text, isError = true){
+  authMessage.innerText = text;
+  authMessage.style.color = isError ? "#dc2626" : "#16a34a";
+}
+
+function getUsers(){
+  const users = localStorage.getItem("quizUsers");
+  return users ? JSON.parse(users) : {};
+}
+
+function setUsers(users){
+  localStorage.setItem("quizUsers", JSON.stringify(users));
+}
+
+function switchAuthMode(mode){
+  authMode = mode;
+  showLoginBtn.classList.toggle("active", mode === "login");
+  showRegisterBtn.classList.toggle("active", mode === "register");
+  confirmPasswordInput.style.display = mode === "register" ? "block" : "none";
+  authButton.textContent = mode === "login" ? "🚀 Entrance" : "✍️ Sign up";
+  setAuthMessage("");
+}
+
+function showStartScreen(name){
+  loginBox.style.display = "none";
+  startBox.style.display = "block";
+  document.querySelector("#startBox .intro").innerText = `Welcome, ${name}! Click the button to start the test.`;
+}
+
+function handleAuth(){
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+  const confirmPassword = confirmPasswordInput.value.trim();
+
+  if(!username || !password){
+    setAuthMessage("Please enter your username and password.");
+    return;
+  }
+
+  const users = getUsers();
+
+  if(authMode === "register"){
+    if(users[username]){
+      setAuthMessage("This username already exists.");
+      return;
+    }
+    if(password !== confirmPassword){
+      setAuthMessage("The passwords did not match.");
+      return;
+    }
+    users[username] = password;
+    setUsers(users);
+    setAuthMessage("✅ Registration successful! Log in now.", false);
+    switchAuthMode("login");
+    passwordInput.value = "";
+    confirmPasswordInput.value = "";
+    return;
+  }
+
+  if(!users[username] || users[username] !== password){
+    setAuthMessage("Invalid username or password.");
+    return;
+  }
+
+  currentUser = username;
+  setAuthMessage("✅ Login successful.", false);
+  showStartScreen(username);
+}
+
+function loadQuestion(){
+
+selectedAnswer = null;
+answered = false;
+nextBtn.disabled = true;
+ feedback.innerText = "";
+progress.innerHTML = `Question ${current + 1} / ${tests.length}`;
+ 
+question.textContent = tests[current].question;
+
+answers.innerHTML = "";
+
+let options = [...tests[current].options];
+
+options.sort(() => Math.random() - 0.5);
+
+options.forEach(option => {
+
+const div = document.createElement("div");
+
+div.classList.add("answer");
+
+div.innerHTML = option;
+
+div.onclick = () => {
+  if (answered) return;
+
+  document.querySelectorAll(".answer").forEach(el=>{
+    el.classList.remove("selected");
+  });
+
+  div.classList.add("selected");
+selectedAnswer = option;
+  nextBtn.disabled = false;
+  answered = true;
+
+  if(option === tests[current].answer){
+    div.classList.add("correct");
+    feedback.innerText = "To'g'ri!";
+    feedback.style.color = "#16a34a";
+  } else {
+    div.classList.add("wrong");
+    feedback.innerText = `Noto'g'ri! To'g'ri javob: ${tests[current].answer}`;
+    feedback.style.color = "#dc2626";
+    document.querySelectorAll(".answer").forEach(el=>{
+      if(el.innerHTML === tests[current].answer){
+        el.classList.add("correct");
+      }
+    });
+  }
+
+  document.querySelectorAll(".answer").forEach(el => {
+    el.style.pointerEvents = "none";
+  });
+
+};
+
+answers.appendChild(div);
+
+});
+
+}
+
+function startTest(){
+  startBox.style.display = "none";
+  quizBox.style.display = "block";
+  loadQuestion();
+  updateTimer();
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+function recordAnswer(){
+  answerLog[current] = {
+    question: tests[current].question,
+    selected: selectedAnswer || "Tanlanmagan",
+    correct: tests[current].answer
+  };
+}
+
+function buildReview(){
+  review.innerHTML = "";
+  answerLog.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.classList.add("review-item");
+    div.innerHTML = `
+      <strong>${index + 1}. ${item.question}</strong>
+      <p>Tanlangan: ${item.selected}</p>
+      <p>To'g'ri javob: ${item.correct}</p>
+    `;
+    review.appendChild(div);
+  });
+}
+
+function updateTimer(){
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  timer.innerHTML = `${minutes}:${seconds}`;
+  time--;
+  if(time < 0){
+    finishQuiz();
+  }
+}
+
+showLoginBtn.onclick = () => switchAuthMode("login");
+showRegisterBtn.onclick = () => switchAuthMode("register");
+authButton.onclick = handleAuth;
+startBtn.onclick = startTest;
+
+document.getElementById("nextBtn").onclick = () => {
+  recordAnswer();
+
+  if(selectedAnswer === tests[current].answer){
+    correct++;
+  }
+
+  current++;
+
+  if(current >= tests.length){
+    finishQuiz();
+  }
+  else{
+    loadQuestion();
+  }
+
+};
+
+document.getElementById("finishBtn").onclick = () => {
+  recordAnswer();
+  finishQuiz();
+};
+
+function finishQuiz(){
+
+if(timerInterval){
+  clearInterval(timerInterval);
+}
+
+document.getElementById("quizBox").style.display = "none";
+
+document.getElementById("resultBox").style.display = "block";
+
+document.getElementById("correct").innerHTML =
+`Togri javoblar: ${correct}`;
+
+document.getElementById("wrong").innerHTML =
+`Xato javoblar: ${tests.length - correct}`;
+
+document.getElementById("score").innerHTML =
+`Natija: ${Math.floor((correct/tests.length)*100)}%`;
+
+buildReview();
+}
+
+
+
+let time = 50 * 60;
+
+const timer = document.getElementById("timer");
+
+</script>
+
+</body>
+</html>
